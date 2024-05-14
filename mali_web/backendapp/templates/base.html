@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ville de québec </title>
+   
+<!-- juste copier coller depuis site coter tutoriel -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+
+
+ <!-- mon style css utilisé  -->
+<link rel="stylesheet" href="{% static 'style.css' %}">
+ <!-- c'est ma couche geojson  -->
+ <script src="{% static 'mali.js' %}"></script>
+
+ <!-- pour axios  -->
+ <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+ 
+<!--les liens necessaire de plugins que j'ai utilisé pour mesurer les pplygones  -->
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+ <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css" />
+ <link rel="stylesheet" href="https://prominentedge.com/leaflet-measure-path/leaflet-measure-path.css" />
+ <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+ <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
+ <script src="https://npmcdn.com/leaflet-editable@0.6.2/src/Leaflet.Editable.js" ></script>
+ <script src="https://prominentedge.com/leaflet-measure-path/leaflet-measure-path.js"></script>
+ <!-- le script complet de plugins pour mesurer les polygones ce trouve dans mes dossiers du projet-->
+ <script src="{% static 'leaflet.MeasurePolygon.js' %}"></script>
+ </head>
+<body>
+
+
+    
+{% block content %}
+
+
+{% endblock %}
+<!-- Les scripts sont les derniers elements a exécuté toujour a la fin de body -->
+
+<script src="{% static 'javas.js' %}"></script>
+<!-- juste copier coller depuis site coter tutoriel -->
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+ integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+ crossorigin=""></script>
+      
+
+
+</body>
+
+</html>

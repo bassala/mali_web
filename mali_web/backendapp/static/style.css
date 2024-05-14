@@ -1,0 +1,58 @@
+
+#map{
+    /*
+    position: absolute;
+    right: 0%;
+#    */
+    left: 0%;
+    bottom: 0%;
+    top: 0%;
+    width: 800px;
+    height: 600px;
+
+}
+
+.legend {
+    line-height: 18px;
+    color: black;
+    font: bold;
+
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
+#conteneur{
+    display: flex;
+    
+}
+
+#texte{
+    position: relative;
+    width: 400px;
+    height: 390px;
+    left: 10px;
+    margin-top: 10px;
+    border: 2px solid black;
+    padding-left: 2px;
+    
+}
+
+#titre{
+    position: relative;
+    width: 400px;
+    height: 200px;
+    left: 10px;
+    border: 2px solid black;
+    padding-left: 2px;
+    
+}
+
+#conteneur_2{
+    display: inline-block;
+    
+}
