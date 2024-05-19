@@ -1,0 +1,123 @@
+Prérequis
+Pannellum pour les panoramas (https://pannellum.org/).
+Toutes les configurations précédentes avec Django, Leaflet, et le backend API.
+
+Prérequis
+Python installé sur votre machine.
+Django installé (pip install django).
+Leaflet.js pour la gestion des cartes.
+Django REST Framework pour créer des API REST (pip install djangorestframework).
+Pannellum pour afficher des images panoramiques (aucune installation nécessaire, il sera chargé via un CDN).
+      <script src="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.css" />
+    <style>
+Connaissance de base de HTML, CSS, et JavaScript.
+
+
+
+
+
+
+Étape 1 : Mise à jour du modèle
+Assurez-vous que votre modèle PointOfInterest inclut un champ pour l'URL de l'image panoramique :
+
+python
+Copier le code
+from django.db import models
+
+class PointOfInterest(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.TextField()
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    panorama_url = models.URLField()  # URL de l'image panoramique
+
+    def __str__(self):
+        return self.name
+Étape 2 : Mise à jour du sérialiseur
+Dans mapapp/serializers.py :
+
+python
+Copier le code
+from rest_framework import serializers
+from .models import PointOfInterest
+
+class PointOfInterestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PointOfInterest
+        fields = '__all__'
+Étape 3 : Mise à jour de l'API Vue
+Dans mapapp/views.py :
+
+python
+Copier le code
+from rest_framework import viewsets
+from .models import PointOfInterest
+from .serializers import PointOfInterestSerializer
+
+class PointOfInterestViewSet(viewsets.ModelViewSet):
+    queryset = PointOfInterest.objects.all()
+    serializer_class = PointOfInterestSerializer
+Étape 4 : Mise à jour du template HTML
+Modifiez mapapp/templates/mapapp/index.html pour inclure Pannellum et intégrer la visite virtuelle :
+
+html
+Copier le code
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visite Virtuelle SIGWeb</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.css" />
+    <style>
+        #map { height: 600px; }
+        #panorama { width: 100%; height: 400px; display: none; }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div id="panorama"></div>
+    <script>
+        var map = L.map('map').setView([48.8566, 2.3522], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        fetch('/api/pois/')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(poi => {
+                    var marker = L.marker([poi.latitude, poi.longitude]).addTo(map);
+                    marker.bindPopup(`<b>${poi.name}</b><br>${poi.description}<br><button onclick="showPanorama('${poi.panorama_url}')">Visite Virtuelle</button>`);
+                });
+            });
+
+        function showPanorama(url) {
+            var panoramaContainer = document.getElementById('panorama');
+            panoramaContainer.style.display = 'block';
+            pannellum.viewer('panorama', {
+                "type": "equirectangular",
+                "panorama": url
+            });
+        }
+    </script>
+</body>
+</html>
+Étape 5 : Tester l'application
+Lancer le serveur de développement :
+
+sh
+Copier le code
+python manage.py runserver
+Accéder à l'application :
+
+Ouvrez votre navigateur et allez à http://127.0.0.1:8000/.
+
+Résultat
+Vous verrez une carte avec des marqueurs pour chaque point d'intérêt. En cliquant sur un marqueur, une popup apparaîtra avec des détails et un bouton pour afficher la visite virtuelle. En cliquant sur ce bouton, une vue panoramique s'affichera sous la carte, offrant une expérience de visite virtuelle immersive.
+
+Conclusion
+Vous avez maintenant intégré une fonctionnalité de visite virtuelle avec des images panoramiques dans votre application Django utilisant Leaflet pour afficher les points d'intérêt sur une carte. Vous pouvez enrichir cette fonctionnalité en ajoutant des interactions supplémentaires, comme des points d'intérêt multiples dans une même vue panoramique ou des transitions entre différentes vues panoramiques.
