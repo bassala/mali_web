@@ -2,11 +2,11 @@ from django.contrib.gis.db import models as gis_models
 from django.db import models
 
 
-class Region(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-    #habitats = models.IntegerField()
-    def __str__(self):
-        return self.name
+# class Region(models.Model):
+#     name = models.CharField(max_length=100, unique=True)
+#     #habitats = models.IntegerField()
+#     def __str__(self):
+#         return self.name
 
 # pour Bamako
 class Bamako(models.Model):

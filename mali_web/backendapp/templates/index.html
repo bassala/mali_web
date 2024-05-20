@@ -4,18 +4,89 @@
 {% block title %}Titre de votre page{% endblock %}
 
 {% block content %}
+<style>
+    #map {
+        /* styles pour la carte */
+        left: 0%;
+        bottom: 0%;
+        top: 0%;
+        width: 800px;
+        height: 600px;
+    }
+
+    .legend {
+        /* styles pour la légende */
+        line-height: 18px;
+        color: black;
+        font: bold;
+    }
+
+    .legend i {
+        /* styles pour les éléments de la légende */
+        width: 18px;
+        height: 18px;
+        float: left;
+        margin-right: 8px;
+        opacity: 0.7;
+    }
+
+    #conteneur {
+        /* styles pour le conteneur principal */
+        display: flex;
+    }
+
+    #texte {
+        /* styles pour le texte */
+        position: relative;
+        width: 400px;
+        height: 390px;
+        left: 10px;
+        margin-top: 10px;
+        border: 2px solid black;
+        padding-left: 2px;
+    }
+
+    #titre {
+        /* styles pour le titre */
+        position: relative;
+        width: 400px;
+        height: 200px;
+        left: 10px;
+        border: 2px solid black;
+        padding-left: 2px;
+    }
+
+    #conteneur_2 {
+        /* styles pour le deuxième conteneur */
+        display: inline-block;
+    }
+
+    table {
+        /* styles pour la table */
+        margin-top: 2px;
+        
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        /* styles pour les cellules de la table */
+        border: 2px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+</style>
 
 <div id="conteneur">
     
-<div id="map">  </div>
+    <div id="map"></div>
 
-<div id="conteneur_2">   
-<div id="titre">
-     <h2>Cliquer pour voir les informations</h2>
-
-</div>  
-<div id="texte"></div> 
-</div>
+    <div id="conteneur_2">   
+        <div id="titre">
+            <h2>Cliquer pour voir les informations</h2>
+        </div>  
+        <div id="texte"></div> 
+    </div>
 
 </div>
 {% endblock %}

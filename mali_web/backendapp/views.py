@@ -30,8 +30,12 @@ def get_region_data(request):
         region_model = Kayes
 
     if region_model:
-        region = region_model.objects.first()  # Sélectionner la première instance
-        data = {'habitats': region.habitats}
+        # regions = region_model.objects.all()  # Sélectionner toutes les instances
+        # data = [{'habitats': region.habitats, 'image': region.image} for region in regions]
+        # return JsonResponse({'data': data})
+        regions = region_model.objects.all()  # Sélectionner toutes les instances
+        habitats = [region.habitats for region in regions]
+        data = {'habitats': habitats}
         return JsonResponse(data)
     else:
         return JsonResponse({'error': 'Région non trouvée'})

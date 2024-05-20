@@ -1,9 +1,6 @@
-
+/*
 #map{
-    /*
-    position: absolute;
-    right: 0%;
-#    */
+   
     left: 0%;
     bottom: 0%;
     top: 0%;
@@ -55,4 +52,15 @@
 #conteneur_2{
     display: inline-block;
     
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
 }

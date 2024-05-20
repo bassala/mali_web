@@ -107,16 +107,17 @@ function zoomToFeature(e) {
     })
     .then(function (response) {
         document.getElementById('texte').innerHTML =
-            '<table>' +
-            '<tr>' +
-            '<th>Région</th>' +
-            '<th>Habitats</th>' +
-            '</tr>' +
-            '<tr>' +
-            '<td>' + regionName + '</td>' +
-            '<td>' + response.data.habitats + '</td>' +
-            '</tr>' +
-            '</table>';
+        
+        '<table >' +
+        '<tr>' +
+        '<th>Région</th>' +
+        '<th>Habitats</th>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>' + regionName + '</td>' +
+        '<td>' + data.habitats + '</td>' +
+        '</tr>' +
+        '</table>';
     })
     .catch(function (error) {
         console.log(error);
