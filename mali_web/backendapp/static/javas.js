@@ -106,18 +106,9 @@ function zoomToFeature(e) {
         }
     })
     .then(function (response) {
-        document.getElementById('texte').innerHTML =
-        
-        '<table >' +
-        '<tr>' +
-        '<th>Région</th>' +
-        '<th>Habitats</th>' +
-        '</tr>' +
-        '<tr>' +
-        '<td>' + regionName + '</td>' +
-        '<td>' + data.habitats + '</td>' +
-        '</tr>' +
-        '</table>';
+        console.log(response.data);
+        document.getElementById('regionCell').textContent = regionName;
+        document.getElementById('habitatsCell').textContent = response.data.habitats;
     })
     .catch(function (error) {
         console.log(error);
